@@ -9,3 +9,29 @@ import pandas as pd
 # As file did not include column names, they were added using 'names' as an argument
 df = pd.read_csv('iris.data', names = ["sepal length in cm", "sepal width in cm", "petal length in cm", "petal width in cm", "class"])
 print(df)
+
+# Summary of sepal length
+
+
+# Summary of sepal width
+
+
+# Summary of petal length
+
+
+# Summary of petal width
+
+
+# Histogram of of sepal length
+
+
+# Histogram of sepal width
+
+
+# Histogram of petal length
+
+
+# Histogram of petal width
+
+
+# Scatterplots
