@@ -1,5 +1,7 @@
 # pands-project2021
 
+This will be messy and unorganised notes that will later be polished after writing more code.
+
 As iris data set was in .data format, I first had to look up whether reading that filetype into python reqquired any different methods than a csv or json file - https://www.askpython.com/python/examples/read-data-files-in-python
 
 
