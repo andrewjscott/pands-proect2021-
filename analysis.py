@@ -4,6 +4,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 
 # Loading in Fisher’s Iris data set from a .data file
 # As file did not include column names, they were added using 'names' as an argument
@@ -20,7 +21,7 @@ iris = pd.read_csv('iris.data', names = ["sepal length in cm", "sepal width in c
 iris.describe()
 iris.describe().to_csv(r'iris_summary.txt', sep=',', mode='w')
 
-
+"""
 # Summaries seperated by class
 # Summary of sepal length
 iris[["sepal length in cm", "class"]].groupby("class").describe().to_csv(r'iris_summary.txt', index="class", sep=',', mode='a')
@@ -36,15 +37,28 @@ iris[["petal width in cm", "class"]].groupby("class").describe().to_csv(r'iris_s
 
 
 # Histogram of of sepal length
-
+sns.histplot(iris, x = "sepal length in cm", hue="class", kde=True, binwidth=0.2)
+plt.grid()
+# Saves the plot as a png image
+plt.savefig('HistogramSepalLength.png')
+plt.clf() # Clears the plot so a new plot can be created. Without this, the subsequent plots are combined into the previous plot
 
 # Histogram of sepal width
-
+sns.histplot(iris, x = "sepal width in cm", hue="class", kde=True, binwidth=0.2)
+plt.grid()
+plt.savefig('HistogramSepalWidth.png')
+plt.clf()
 
 # Histogram of petal length
-
+sns.histplot(iris, x = "petal length in cm", hue="class", kde=True, binwidth=0.2)
+plt.grid()
+plt.savefig('HistogramPetalLength.png')
+plt.clf()
 
 # Histogram of petal width
-
-
+sns.histplot(iris, x = "petal width in cm", hue="class", kde=True, binwidth=0.2)
+plt.grid()
+plt.savefig('HistogramPetalWidth.png')
+plt.clf()
+"""
 # Scatterplots
