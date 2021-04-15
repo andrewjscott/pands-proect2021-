@@ -1,0 +1,6 @@
+,sepal width in cm,sepal width in cm,sepal width in cm,sepal width in cm,sepal width in cm,sepal width in cm,sepal width in cm,sepal width in cm
+,count,mean,std,min,25%,50%,75%,max
+class,,,,,,,,
+Iris-setosa,50.0,3.4180000000000006,0.38102439795469095,2.3,3.125,3.4,3.6750000000000003,4.4
+Iris-versicolor,50.0,2.7700000000000005,0.3137983233784114,2.0,2.525,2.8,3.0,3.4
+Iris-virginica,50.0,2.9739999999999998,0.3224966381726376,2.2,2.8,3.0,3.1750000000000003,3.8
