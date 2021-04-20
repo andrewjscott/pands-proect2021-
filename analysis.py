@@ -9,8 +9,12 @@ import seaborn as sns
 # Loading in Fisher’s Iris data set from a .data file
 # As file did not include column names, they were added using 'names' as an argument
 iris = pd.read_csv('iris.data', names = ["sepal length in cm", "sepal width in cm", "petal length in cm", "petal width in cm", "class"])
+"""
+# Add check to see if data is complete, no missing values etc 
+# https://stackoverflow.com/questions/29530232/how-to-check-if-any-value-is-nan-in-a-pandas-dataframe
+print(iris.isnull().values.any())
 
-# Add check to see if data is complete, no missing values etc
+# Returns false, showing that there are no missing values in this dataset
 
 
 # Overall summary
@@ -58,7 +62,7 @@ iris[["petal length in cm", "class"]].groupby("class").describe().to_csv(r'petal
 # Summary of petal width
 iris[["petal width in cm", "class"]].groupby("class").describe().to_csv(r'petal_width_summary.csv', index="class", sep=',', mode='w')
 
-"""
+
 # Histogram of of sepal length
 sns.histplot(iris, x = "sepal length in cm", hue="class", kde=True, binwidth=0.2)
 plt.grid()
@@ -92,13 +96,26 @@ sns.set_style("whitegrid")
 sns.pairplot(iris, hue="class", markers=["o", "s", "D"])
 plt.savefig('Pairplot.png')
 plt.clf()
-
-
-# Density function
-
+"""
 
 # Boxplot
+# Melt is used to transform the dataframe such that the variables are condensed into one column, which will allow me to call 
+# them as an axis on a cat plot: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.melt.html 
+# This will allow me to show the boxplot for all 4 variables side by side, with the variable
+# as the y axis. Idea for this found in a response by user Ian Thompson:
+# https://stackoverflow.com/questions/52472757/creating-a-boxplot-facetgrid-in-seaborn-for-python
+iris_melt = iris.melt(id_vars='class')
 
+sns.set_style("whitegrid")
+sns.catplot(data=iris_melt, x="class", y="value", col="variable", kind = "box", col_wrap=2)
+plt.savefig('Boxplot.png')
+plt.clf()
 
 # Violin plot
-"""
+# Violin grids by default had y axis ticks set at 2, so assigning a variable and then adding a line of code to adjust the y axis was used
+# as mentioned in: https://cduvallet.github.io/posts/2018/11/facetgrid-ylabel-access 
+sns.set_style("whitegrid")
+violin = sns.catplot(data=iris_melt, x="class", y="value", col="variable", kind = "violin", col_wrap=2)
+violin.set(yticks=list(range(9)))
+plt.savefig('Violin.png')
+plt.clf()
