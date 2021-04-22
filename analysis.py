@@ -96,7 +96,7 @@ sns.set_style("whitegrid")
 sns.pairplot(iris, hue="class", markers=["o", "s", "D"])
 plt.savefig('Pairplot.png')
 plt.clf()
-"""
+
 
 # Boxplot
 # Melt is used to transform the dataframe such that the variables are condensed into one column, which will allow me to call 
@@ -119,3 +119,17 @@ violin = sns.catplot(data=iris_melt, x="class", y="value", col="variable", kind 
 violin.set(yticks=list(range(9)))
 plt.savefig('Violin.png')
 plt.clf()
+
+# Correlations
+correlations = iris.corr()
+with open("iris_summary.txt", "a") as f:
+    f.write("\t\t" + "  Variable Correlations"+ "\n") # Add a title to the output table. Tabs and spaces added to format titles similar to other tables
+    f.write(correlations.to_string() + "\n\n")
+
+corr_map = sns.heatmap(correlations, cmap="RdGy", annot=True)
+# fixed an initial issue where axis labels were being cut off: https://stackoverflow.com/questions/33660420/seaborn-ticklabels-are-being-truncated
+corr_map.figure.tight_layout() 
+plt.savefig('Correlation Heatmap.png')
+plt.clf()
+"""
+
