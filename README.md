@@ -10,6 +10,9 @@ This will be messy and unorganised notes that will later be polished after writi
 
 # Anderson
 
+# Dataset
+The dataset was retreived from: http://archive.ics.uci.edu/ml/datasets/Iris
+I originally followed the attribute information listed on this website, using their titles for each column in the dataset. However, taxonomically speaking, titling the column containing the flower types as "class" is incorrect, as class is a higher order in the taxiomix hierarchy, and instead they should be labelled as "species" - https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=43195#null
 
 As iris data set was in .data format, I first had to look up whether reading that filetype into python reqquired any different methods than a csv or json file - https://www.askpython.com/python/examples/read-data-files-in-python
 
