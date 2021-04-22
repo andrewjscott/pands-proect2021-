@@ -8,8 +8,8 @@ import seaborn as sns
 
 # Loading in Fisher’s Iris data set from a .data file
 # As file did not include column names, they were added using 'names' as an argument
-iris = pd.read_csv('iris.data', names = ["sepal length in cm", "sepal width in cm", "petal length in cm", "petal width in cm", "class"])
-"""
+iris = pd.read_csv('iris.data', names = ["sepal length in cm", "sepal width in cm", "petal length in cm", "petal width in cm", "species"])
+
 # Add check to see if data is complete, no missing values etc 
 # https://stackoverflow.com/questions/29530232/how-to-check-if-any-value-is-nan-in-a-pandas-dataframe
 print(iris.isnull().values.any())
@@ -26,16 +26,16 @@ with open("iris_summary.txt", "w") as f:
     descriptives = iris.describe()
     f.write(descriptives.to_string() + "\n\n") 
     
-    sepal_length_summary = iris[["sepal length in cm", "class"]].groupby("class").describe()
+    sepal_length_summary = iris[["sepal length in cm", "species"]].groupby("species").describe()
     f.write(sepal_length_summary.to_string() + "\n\n")
 
-    sepal_width_summary = iris[["sepal width in cm", "class"]].groupby("class").describe()
+    sepal_width_summary = iris[["sepal width in cm", "species"]].groupby("species").describe()
     f.write(sepal_width_summary.to_string() + "\n\n")
 
-    petal_length_summary = iris[["petal length in cm", "class"]].groupby("class").describe()
+    petal_length_summary = iris[["petal length in cm", "species"]].groupby("species").describe()
     f.write(petal_length_summary.to_string() + "\n\n")
 
-    petal_width_summary = iris[["petal width in cm", "class"]].groupby("class").describe()
+    petal_width_summary = iris[["petal width in cm", "species"]].groupby("species").describe()
     f.write(petal_width_summary.to_string() + "\n\n")
 
 
@@ -49,51 +49,51 @@ with open("iris_summary.txt", "w") as f:
 iris.describe()
 iris.describe().to_csv(r'iris_summary_descriptive.csv', sep=',', mode='w')
 
-# Summaries seperated by class
+# Summaries seperated by species
 # Summary of sepal length
-iris[["sepal length in cm", "class"]].groupby("class").describe().to_csv(r'sepal_length_summary.csv', index="class", sep=',', mode='w')
+iris[["sepal length in cm", "species"]].groupby("species").describe().to_csv(r'sepal_length_summary.csv', index="species", sep=',', mode='w')
 
 # Summary of sepal width
-iris[["sepal width in cm", "class"]].groupby("class").describe().to_csv(r'sepal_width_summary.csv', index="class", sep=',', mode='w')
+iris[["sepal width in cm", "species"]].groupby("species").describe().to_csv(r'sepal_width_summary.csv', index="species", sep=',', mode='w')
 
 # Summary of petal length
-iris[["petal length in cm", "class"]].groupby("class").describe().to_csv(r'petal_length_summary.csv', index="class", sep=',', mode='w')
+iris[["petal length in cm", "species"]].groupby("species").describe().to_csv(r'petal_length_summary.csv', index="species", sep=',', mode='w')
 
 # Summary of petal width
-iris[["petal width in cm", "class"]].groupby("class").describe().to_csv(r'petal_width_summary.csv', index="class", sep=',', mode='w')
+iris[["petal width in cm", "species"]].groupby("species").describe().to_csv(r'petal_width_summary.csv', index="species", sep=',', mode='w')
 
 
 # Histogram of of sepal length
-sns.histplot(iris, x = "sepal length in cm", hue="class", kde=True, binwidth=0.2)
+sns.histplot(iris, x = "sepal length in cm", hue="species", kde=True, binwidth=0.2)
 plt.grid()
 # Saves the plot as a png image
 plt.savefig('HistogramSepalLength.png')
 plt.clf() # Clears the plot so a new plot can be created. Without this, the subsequent plots are combined into the previous plot
 
 # Histogram of sepal width
-sns.histplot(iris, x = "sepal width in cm", hue="class", kde=True, binwidth=0.2,)
+sns.histplot(iris, x = "sepal width in cm", hue="species", kde=True, binwidth=0.2,)
 plt.grid()
 plt.savefig('HistogramSepalWidth.png')
 plt.clf()
 
 # Histogram of petal length
-sns.histplot(iris, x = "petal length in cm", hue="class", kde=True, binwidth=0.2)
+sns.histplot(iris, x = "petal length in cm", hue="species", kde=True, binwidth=0.2)
 plt.grid()
 plt.savefig('HistogramPetalLength.png')
 plt.clf()
 
 # Histogram of petal width
-sns.histplot(iris, x = "petal width in cm", hue="class", kde=True, binwidth=0.2)
+sns.histplot(iris, x = "petal width in cm", hue="species", kde=True, binwidth=0.2)
 plt.grid()
 plt.savefig('HistogramPetalWidth.png')
 plt.clf()
 
 
 # Scatterplots
-# Using different markers as well as colour to make the different classes more clear, which is important ahould someone with colourblindness find 
-# it tricky to differentiate classes by colour alone.
+# Using different markers as well as colour to make the different specieses more clear, which is important ahould someone with colourblindness find 
+# it tricky to differentiate specieses by colour alone.
 sns.set_style("whitegrid")
-sns.pairplot(iris, hue="class", markers=["o", "s", "D"])
+sns.pairplot(iris, hue="species", markers=["o", "s", "D"])
 plt.savefig('Pairplot.png')
 plt.clf()
 
@@ -104,10 +104,10 @@ plt.clf()
 # This will allow me to show the boxplot for all 4 variables side by side, with the variable
 # as the y axis. Idea for this found in a response by user Ian Thompson:
 # https://stackoverflow.com/questions/52472757/creating-a-boxplot-facetgrid-in-seaborn-for-python
-iris_melt = iris.melt(id_vars='class')
+iris_melt = iris.melt(id_vars='species')
 
 sns.set_style("whitegrid")
-sns.catplot(data=iris_melt, x="class", y="value", col="variable", kind = "box", col_wrap=2)
+sns.catplot(data=iris_melt, x="species", y="value", col="variable", kind = "box", col_wrap=2)
 plt.savefig('Boxplot.png')
 plt.clf()
 
@@ -115,7 +115,7 @@ plt.clf()
 # Violin grids by default had y axis ticks set at 2, so assigning a variable and then adding a line of code to adjust the y axis was used
 # as mentioned in: https://cduvallet.github.io/posts/2018/11/facetgrid-ylabel-access 
 sns.set_style("whitegrid")
-violin = sns.catplot(data=iris_melt, x="class", y="value", col="variable", kind = "violin", col_wrap=2)
+violin = sns.catplot(data=iris_melt, x="species", y="value", col="variable", kind = "violin", col_wrap=2)
 violin.set(yticks=list(range(9)))
 plt.savefig('Violin.png')
 plt.clf()
@@ -131,5 +131,3 @@ corr_map = sns.heatmap(correlations, cmap="RdGy", annot=True)
 corr_map.figure.tight_layout() 
 plt.savefig('Correlation Heatmap.png')
 plt.clf()
-"""
-
