@@ -29,3 +29,6 @@ I prefer to have grids on my plot to be able to better read where a point on the
 
 
 # violin plot
+
+
+# Heatmap

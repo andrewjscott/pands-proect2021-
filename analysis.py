@@ -2,8 +2,8 @@
 # Author: Andrew Scott
 
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Loading in Fisher’s Iris data set from a .data file
@@ -93,7 +93,8 @@ plt.clf()
 # Using different markers as well as colour to make the different specieses more clear, which is important ahould someone with colourblindness find 
 # it tricky to differentiate specieses by colour alone.
 sns.set_style("whitegrid")
-sns.pairplot(iris, hue="species", markers=["o", "s", "D"])
+pair = sns.pairplot(iris, hue="species", markers=["o", "s", "D"])
+pair.map_upper(sns.kdeplot, levels=3)
 plt.savefig('Pairplot.png')
 plt.clf()
 
@@ -123,7 +124,7 @@ plt.clf()
 # Correlations
 correlations = iris.corr()
 with open("iris_summary.txt", "a") as f:
-    f.write("\t\t" + "  Variable Correlations"+ "\n") # Add a title to the output table. Tabs and spaces added to format titles similar to other tables
+    f.write("\t\t"+"  Variable Correlations"+"\n") # Add a title to the output table. Tabs and spaces added to format titles similar to other tables
     f.write(correlations.to_string() + "\n\n")
 
 corr_map = sns.heatmap(correlations, cmap="RdGy", annot=True)
@@ -131,3 +132,5 @@ corr_map = sns.heatmap(correlations, cmap="RdGy", annot=True)
 corr_map.figure.tight_layout() 
 plt.savefig('Correlation Heatmap.png')
 plt.clf()
+
+
