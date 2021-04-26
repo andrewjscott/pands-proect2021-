@@ -12,17 +12,16 @@ iris = pd.read_csv('iris.data', names = ["sepal length in cm", "sepal width in c
 
 # Add check to see if data is complete, no missing values etc 
 # https://stackoverflow.com/questions/29530232/how-to-check-if-any-value-is-nan-in-a-pandas-dataframe
-print(iris.isnull().values.any())
-
-# Returns false, showing that there are no missing values in this dataset
-
+print(iris.isnull().values.any()) # Returns false, showing that there are no missing values in this dataset
+print(iris.shape) # Prints the number of rows and columns. As expected, we get (150, 5). 
+print(iris.info()) # Confirms that we indeed has no null values, row and column size, and shows us the data type in each column
 
 # Overall summary
 # Checks for a text file by the specified name, and if it does not exist that file is created. It is in write mode meaning anything written to the 
-# file will be 
+# file will be deleted and replaced with the output of this code.
 with open("iris_summary.txt", "w") as f:
     # Creates a pandas dataframe containing basic descriptive statistics from the dataset. This is then converted to a string so it can be 
-    # written to the text file. Two new lines are also specidied to seperate this output from subsequent outputs
+    # written to the text file. Two new lines are also specified to seperate this output from subsequent outputs
     descriptives = iris.describe()
     f.write(descriptives.to_string() + "\n\n") 
     
@@ -46,7 +45,6 @@ with open("iris_summary.txt", "w") as f:
 # "r" before the filename means the file path is read literally by python, to avoid conflict with any characters 
 # that may have other purposes in python https://discuss.python.org/t/what-does-r-define-in-file-path/3646
 # Dataframe to csv file output set to write so it will overwrite anything existing on the csv file each time code is run.
-iris.describe()
 iris.describe().to_csv(r'iris_summary_descriptive.csv', sep=',', mode='w')
 
 # Summaries seperated by species
@@ -89,16 +87,6 @@ plt.savefig('HistogramPetalWidth.png')
 plt.clf()
 
 
-# Scatterplots
-# Using different markers as well as colour to make the different specieses more clear, which is important ahould someone with colourblindness find 
-# it tricky to differentiate specieses by colour alone.
-sns.set_style("whitegrid")
-pair = sns.pairplot(iris, hue="species", markers=["o", "s", "D"])
-pair.map_upper(sns.kdeplot, levels=3)
-plt.savefig('Pairplot.png')
-plt.clf()
-
-
 # Boxplot
 # Melt is used to transform the dataframe such that the variables are condensed into one column, which will allow me to call 
 # them as an axis on a cat plot: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.melt.html 
@@ -121,6 +109,15 @@ violin.set(yticks=list(range(9)))
 plt.savefig('Violin.png')
 plt.clf()
 
+# Scatterplots
+# Using different markers as well as colour to make the different specieses more clear, which is important ahould someone with colourblindness find 
+# it tricky to differentiate specieses by colour alone.
+sns.set_style("whitegrid")
+pair = sns.pairplot(iris, hue="species", markers=["o", "s", "D"])
+pair.map_upper(sns.kdeplot, levels=3)
+plt.savefig('Pairplot.png')
+plt.clf()
+
 # Correlations
 correlations = iris.corr()
 with open("iris_summary.txt", "a") as f:
@@ -132,5 +129,3 @@ corr_map = sns.heatmap(correlations, cmap="RdGy", annot=True)
 corr_map.figure.tight_layout() 
 plt.savefig('Correlation Heatmap.png')
 plt.clf()
-
-
