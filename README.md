@@ -26,7 +26,7 @@ Fisher used the Iris dataset to demonstrate a statistical method that became kno
 ![alt text](https://raw.githubusercontent.com/andrewjscott/PandsWork/main/Before-LDA-and-after-LDA_.jpg "Before and after LDA")
 Image source[5] 
 
-# Dataset
+# Loading the Iris Dataset
 The Iris dataset is commonly used as an introductory dataset to both data analysis and machine learning[6]. This code will be concerned with exploratory data analysis. The dataset was downloaded from a UCI repository[7].
 
 The following libraries are imported to aid with the investigation of this dataset. By calling them as abbreviated names, this means that when we use any methods that these libraries offer, we can call them by simply typing the abbreviation rather than the library’s full name.
@@ -60,7 +60,7 @@ iris = pd.read_csv('iris.data', names = ["sepal length in cm", "sepal width in c
 
 The pandas method read_csv is used to import the dataset and convert it into a pandas dataframe, with the ‘iris.data’ file called as an argument to achieve this. As iris.data is stored in the same folder as the python code, the filename alone is sufficient. If the file resides in a different folder, the entire path to that file would need to be used instead. By default the columns have no names, so names were assigned to each column using the names parameter to make it easier to read what each column of data represents. The names were found on UCI in a file called iris.names, which was hosted in the same location as the iris.data file. I decided to change the name of the final column as calling it class could be confusing, as taxonomically speaking this column does not contain the class. Rather, it contains the species[12]. The dataframe is assigned the variable name iris, which means this variable name can be used for any subsequent code that looks at this dataframe. 
 
-# Summaries
+# Iris Dataset Summaries
 The first step is to make sure that the dataset is complete and balanced. This is to ensure that there are no missing values that may skew the findings. 
 
 ```
