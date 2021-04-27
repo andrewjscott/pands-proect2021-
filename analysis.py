@@ -7,14 +7,15 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Loading in Fisher’s Iris data set from a .data file
+# A .data file can be treated as if it were a csv file: https://www.askpython.com/python/examples/read-data-files-in-python
 # As file did not include column names, they were added using 'names' as an argument
 iris = pd.read_csv('iris.data', names = ["sepal length in cm", "sepal width in cm", "petal length in cm", "petal width in cm", "species"])
 
-# Add check to see if data is complete, no missing values etc 
+# Added check to see if data is complete, no missing values etc 
 # https://stackoverflow.com/questions/29530232/how-to-check-if-any-value-is-nan-in-a-pandas-dataframe
 print(iris.isnull().values.any()) # Returns false, showing that there are no missing values in this dataset
 print(iris.shape) # Prints the number of rows and columns. As expected, we get (150, 5). 
-print(iris.info()) # Confirms that we indeed has no null values, row and column size, and shows us the data type in each column
+print(iris.info()) # Confirms that we indeed have no null values, row and column size, and shows us the data type in each column
 
 # Overall summary
 # Checks for a text file by the specified name, and if it does not exist that file is created. It is in write mode meaning anything written to the 
