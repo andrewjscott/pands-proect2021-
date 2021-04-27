@@ -110,8 +110,8 @@ plt.savefig('Violin.png')
 plt.clf()
 
 # Scatterplots
-# Using different markers as well as colour to make the different specieses more clear, which is important ahould someone with colourblindness find 
-# it tricky to differentiate specieses by colour alone.
+# Using different markers as well as colour to make the different specieses more clear, which is important should someone with colourblindness find 
+# it tricky to differentiate species by colour alone.
 sns.set_style("whitegrid")
 pair = sns.pairplot(iris, hue="species", markers=["o", "s", "D"])
 pair.map_upper(sns.kdeplot, levels=3)
@@ -123,6 +123,9 @@ correlations = iris.corr()
 with open("iris_summary.txt", "a") as f:
     f.write("\t\t"+"  Variable Correlations"+"\n") # Add a title to the output table. Tabs and spaces added to format titles similar to other tables
     f.write(correlations.to_string() + "\n\n")
+
+# Creates a csv file with the correlations table
+correlations.to_csv(r'iris_correlations.csv', sep=',', mode='w')
 
 corr_map = sns.heatmap(correlations, cmap="RdGy", annot=True)
 # fixed an initial issue where axis labels were being cut off: https://stackoverflow.com/questions/33660420/seaborn-ticklabels-are-being-truncated
