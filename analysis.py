@@ -16,6 +16,7 @@ iris = pd.read_csv('iris.data', names = ["sepal length in cm", "sepal width in c
 print(iris.isnull().values.any()) # Returns false, showing that there are no missing values in this dataset
 print(iris.shape) # Prints the number of rows and columns. As expected, we get (150, 5). 
 print(iris.info()) # Confirms that we indeed have no null values, row and column size, and shows us the data type in each column
+print(iris.head()) # Prints first five entries of dataframe to give us an idea about its contents/layout
 
 # Overall summary
 # Checks for a text file by the specified name, and if it does not exist that file is created. It is in write mode meaning anything written to the 
