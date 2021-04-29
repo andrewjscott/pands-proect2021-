@@ -28,7 +28,7 @@ Fisher used the *Iris* dataset to demonstrate a statistical method that became k
 Image source<sup id="a5">[5](#f5)</sup> 
 
 # Loading the *Iris* Dataset
-The *Iris* dataset is commonly used as an introductory dataset to both data analysis and machine learning<sup id="a6">[6](#f6)</sup>. This code will be concerned with exploratory data analysis. The dataset was downloaded from a UCI repository<sup id="a7">[7](#f7)</sup>.
+The *Iris* dataset is commonly used as an introductory dataset to both data analysis and machine learning<sup id="a6">[6](#f6)</sup>. This code will be concerned with exploratory data analysis, with the goal of gaining an understanding about the three *Iris* species measured and what notable patterns can be uncovered. The dataset was downloaded from a UCI repository<sup id="a7">[7](#f7)</sup>.
 
 The following libraries are imported to aid with the investigation of this dataset. By calling them as abbreviated names, this means that when we use any methods that these libraries offer, we can call them by simply typing the abbreviation rather than the library’s full name.
 
