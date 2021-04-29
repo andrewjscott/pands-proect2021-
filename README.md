@@ -13,7 +13,38 @@ seaborn==0.11.1
 These can be installed by downloading the requirements.txt file and running pip3 install -r requirements.txt.   
 The requirements.txt file was generated using pipreqs 0.4.10.
 
-# Background
+
+# Table of Contents
+* <b id="toc1">[Background](#h1)</b>
+* <b id="toc2">[Loading the *Iris* Dataset](#h2)</b>
+* <b id="toc3">[*Iris* Dataset Summary Statistics](#h3)</b>
+    * <b id="toc4">[Overall Summary Table](#h4)</b>
+    * <b id="toc5">[Summary Statistics by Variable](#h5)</b>
+        * <b id="toc6">[Sepal Length in cm](#h6)</b>
+        * <b id="toc7">[Sepal Width in cm](#h7)</b>
+        * <b id="toc8">[Petal Length in cm](#h8)</b>
+        * <b id="toc9">[Petal Width in cm](#h9)</b>
+    * <b id="toc10">[Comma Separated Value Files](#h10)</b>
+* <b id="toc11">[Histograms](#h11)</b>
+    * <b id="toc12">[Sepal Length Histogram](#h12)</b>
+    * <b id="toc13">[Sepal Width Histogram](#h13)</b>
+    * <b id="toc14">[Petal Length Histogram](#h14)</b>
+    * <b id="toc15">[Petal Width Histogram](#h15)</b>
+* <b id="toc16">[Boxplots](#h16)</b>
+    * <b id="toc17">[Boxplots of the *Iris* Dataset](#h17)</b>
+* <b id="toc18">[Violin plot](#h18)</b>
+    * <b id="toc19">[Violin Plots of the *Iris* Dataset](#h19)</b>
+* <b id="toc20">[Scatterplots/Pairplot](#h20)</b>
+    * <b id="toc21">[Pairplot of the *Iris* Dataset](#h21)</b>
+* <b id="toc22">[Correlations](#h22)</b>
+    * <b id="toc23">[Variable Correlations Table](#h23)</b>
+    * <b id="toc24">[Heatmap](#h24)</b>
+        * <b id="toc25">[Correlation Heatmap of the *Iris* Dataset](#25)</b>
+* <b id="toc26">[Conclusion](#h26)</b>
+* <b id="toc27">[Acknowledgements](#h27)</b>
+* <b id="toc28">[References](#h28)</b>
+
+# <b id="h1">Background</b>
 The *Iris* dataset first appeared in a 1936 paper titled "The use of multiple measurements in taxonomic problems", by statistician R. A. Fisher<sup id="a1">[1](#f1)</sup>. The data was collected by botanist Edgar Anderson, who allowed Fisher to analyse and publish the data. The dataset contains 50 samples of three different species of *Iris* flowers - *Iris setosa*, *Iris versicolor*, and *Iris virginica*. Anderson measured four features from each sample - sepal length, sepal width, petal length, and petal width.
 
 ![alt text](https://raw.githubusercontent.com/andrewjscott/PandsWork/main/1%20Hh53mOF4Xy4eORjLilKOwA.png "Iris setosa, Iris versicolor, and Iris virginica, with petals and sepals labelled")
@@ -27,7 +58,7 @@ Fisher used the *Iris* dataset to demonstrate a statistical method that became k
 ![alt text](https://raw.githubusercontent.com/andrewjscott/PandsWork/main/Before-LDA-and-after-LDA_.jpg "Before and after LDA")   
 Image source<sup id="a5">[5](#f5)</sup> 
 
-# Loading the *Iris* Dataset
+# <b id="h2">Loading the *Iris* Dataset</b>
 The *Iris* dataset is commonly used as an introductory dataset to both data analysis and machine learning<sup id="a6">[6](#f6)</sup>. This code will be concerned with exploratory data analysis, with the goal of gaining an understanding about the three *Iris* species measured and what notable patterns can be uncovered. The dataset was downloaded from a UCI repository<sup id="a7">[7](#f7)</sup>.
 
 The following libraries are imported to aid with the investigation of this dataset. By calling them as abbreviated names, this means that when we use any methods that these libraries offer, we can call them by simply typing the abbreviation rather than the library’s full name.
@@ -61,7 +92,7 @@ iris = pd.read_csv('iris.data', names = ["sepal length in cm", "sepal width in c
 
 The pandas method read_csv is used to import the dataset and convert it into a pandas dataframe, with the ‘iris.data’ file called as an argument to achieve this. As iris.data is stored in the same folder as the python code, the filename alone is sufficient. If the file resides in a different folder, the entire path to that file would need to be used instead. By default the columns have no names, so names were assigned to each column using the names parameter to make it easier to read what each column of data represents. The names were found on UCI in a file called iris.names, which was hosted in the same location as the iris.data file. I decided to change the name of the final column as calling it class could be confusing, as taxonomically speaking this column does not contain the class. Rather, it contains the species<sup id="a12">[12](#f12)</sup>. The dataframe is assigned the variable name iris, which means this variable name can be used for any subsequent code that looks at this dataframe. References to this dataframe and python variables containing the word iris will be written with a lower case 'i', whereas reference to the flower *Iris* will be written in italics with a capital 'I'.  
 
-# *Iris* Dataset Summaries
+# <b id="h3">*Iris* Dataset Summaries</b>
 The first step is to make sure that the dataset is complete and balanced, and to get an idea about how the data is structured and laid out. This is to ensure that there are no missing values that may skew the findings. To do this, the following code is used to print out some relevant details about the dataframe to the terminal. 
 
 ```
@@ -100,12 +131,11 @@ descriptives = iris.describe()
     f.write(descriptives.to_string() + "\n\n")
 ```
 
-
 First, the pandas method describe() is used to generate a table of summary statistics<sup id="a18">[18](#f18)</sup>. f.write is used to write the summary table generated to the file iris_summary.txt. The argument descriptives.to_string() is needed as the table is a dataframe object, and as such needs to be converted to a string for the write() method to work<sup id="a19">[19](#f19)</sup>. “\n\n” is used to insert some blank lines after the table in the output file. This is done to separate this table from any subsequent output that gets written to the file. 
 
 Looking at the output table, count confirms that we have 150 measurements for each variable. Mean gives the average value, which is the sum of all the values in a column, divided by the number of values. This will give us a good idea of what the typical size of a variable is. However, caution should be taken as the mean can be affected by an outlier, a value that is considerably larger or smaller than the other values. Std is the standard deviation, which tells us how far from the mean most values lie within. A higher std tells us that the measurements tend to be quite variable in size - as with petal length, whereas a small std tells us that most measurements are similar to each other - see sepal width. Min is the minimum i.e. the smallest measurement in the dataframe. The table then tells us the values of the measurements that lie on the 25%, 50%, and 75% percentiles. This is helpful to better understand the range of values that are typical for each variable. The 50% value can also be used in conjunction with the mean - if these values differ greatly, this may indicate there’s an outlier that may affect our analysis. The difference between the mean and 50% for the petal length suggests there may be an issue with outliers for this measurement<sup id="a20">[20](#f20)</sup>. 
 
-## Overall Summary Table
+## <b id="h4">Overall Summary Statistics</b>
 |       | sepal length in cm | sepal width in cm | petal length in cm | petal width in cm |
 |-------|--------------------|-------------------|--------------------|-------------------|
 | count | 150.000000         | 150.000000        | 150.000000         | 150.000000        |
@@ -117,7 +147,7 @@ Looking at the output table, count confirms that we have 150 measurements for ea
 | 75%   | 6.400000           | 3.300000          | 5.100000           | 1.800000          |
 | max   | 7.900000           | 4.400000          | 6.900000           | 2.500000          |
 
-## Summary statistics by Variable
+## <b id="h5">Summary Statistics by Variable</b>
 Next, in order to get a more detailed look at the dataset, code was written to generate summary statistics for each variable, separated by the species. This should provide information as to where the species are most similar and most different from each other. 
 
 ```
@@ -127,7 +157,7 @@ Next, in order to get a more detailed look at the dataset, code was written to g
 
 This code is similar to the code for overall statistics. However, the parameters of "sepal length in cm" and "species" are used to determine the variables of interest for the calculated statistics, while groupby(“species”) determines how the output table will be formatted<sup id="a21">[21](#f21)</sup>. The code is repeated, with the variable name changing, to get the following four summary tables.
 
-## Sepal length in cm
+## <b id="h6">Sepal Length in cm</b>
 |                 | count | mean  | std      | min | 25%   | 50% | 75% | max |
 |-----------------|-------|-------|----------|-----|-------|-----|-----|-----|
 | species         |       |       |          |     |       |     |     |     |
@@ -135,7 +165,7 @@ This code is similar to the code for overall statistics. However, the parameters
 | *Iris-versicolor* | 50.0  | 5.936 | 0.516171 | 4.9 | 5.600 | 5.9 | 6.3 | 7.0 |
 | *Iris-virginica*  | 50.0  | 6.588 | 0.635880 | 4.9 | 6.225 | 6.5 | 6.9 | 7.9 |
 
-## Sepal width in cm
+## <b id="h7">Sepal Width in cm</b>
 |                 | count | mean  | std      | min | 25%   | 50% | 75%   | max |
 |-----------------|-------|-------|----------|-----|-------|-----|-------|-----|
 | species         |       |       |          |     |       |     |       |     |
@@ -143,7 +173,7 @@ This code is similar to the code for overall statistics. However, the parameters
 | *Iris-versicolor* | 50.0  | 2.770 | 0.313798 | 2.0 | 2.525 | 2.8 | 3.000 | 3.4 |
 | *Iris-virginica*  | 50.0  | 2.974 | 0.322497 | 2.2 | 2.800 | 3.0 | 3.175 | 3.8 |
 
-## Petal length in cm
+## <b id="h8">Petal Length in cm</b>
 |                 | count | mean  | std      | min | 25% | 50%  | 75%   | max |
 |-----------------|-------|-------|----------|-----|-----|------|-------|-----|
 | species         |       |       |          |     |     |      |       |     |
@@ -151,7 +181,7 @@ This code is similar to the code for overall statistics. However, the parameters
 | *Iris-versicolor* | 50.0  | 4.260 | 0.469911 | 3.0 | 4.0 | 4.35 | 4.600 | 5.1 |
 | *Iris-virginica*  | 50.0  | 5.552 | 0.551895 | 4.5 | 5.1 | 5.55 | 5.875 | 6.9 |
 
-## Petal width in cm
+## <b id="h9">Petal Width in cm</b>
 |                 | count | mean  | std      | min | 25% | 50% | 75% | max |
 |-----------------|-------|-------|----------|-----|-----|-----|-----|-----|
 | species         |       |       |          |     |     |     |     |     |
@@ -161,7 +191,7 @@ This code is similar to the code for overall statistics. However, the parameters
 
 From the tables we can see that there is a lot of overlap in sepal length and width between all three species. Of note is that *Iris setosa* typically has smaller sepal length, than *Iris versicolor* and *Iris virginica*, but despite this *Iris setosa* has wider sepals that the other two species. The biggest difference in species can be seen in the petal length, with *Iris setosa* having much shorter petals than *Iris versicolor*, with *Iris virginica* having the longest petals. In the overall table, we saw the standard deviation for petal length was relatively high, but now when the samples are separated by species, the std is smaller for each. This tells us again that there is a large difference between the species types, but when compared to another sample of the same species, the difference is much smaller. The pattern is similar for petal width, with *Iris setosa* being the narrowest and *Iris virginica* being the widest, but this difference is not as large as it is for petal length.
 
-## CSV
+## <b id="h10">Comma Separated Value Files</b>
 Code has also been written that will generate these tables as comma separated value files. CSV files are not as easy to read by default as the dataframe tables generated above, but they are easier to use should someone wish to load these tables and do further work and analysis using them<sup id="a22">[22](#f22)</sup>.
 ```
 iris.describe().to_csv(r'iris_summary_descriptive.csv', sep=',', mode='w')
@@ -169,7 +199,7 @@ iris.describe().to_csv(r'iris_summary_descriptive.csv', sep=',', mode='w')
 This is an example of the code used to generate the csv files<sup id="a23">[23](#f23)</sup>. The summary table is created using describe(), and the method to_csv is used to create the csv file. The name of the output csv file is placed as an argument, while the "r" before the filename means the file path is read literally by python, to avoid conflict with any characters that may have other purposes in python. The argument sep tells the code to use a comma to separate each value, and mode is set to “w” which is write, so the output will write over anything existing on the file. 
 
 
-# Histograms
+# <b id="h11">Histograms</b>
 Histograms are used to represent the frequency of a particular variable in a dataset. Code has been written to generate four histograms - one for each of the four measured variables. 
 
 ```
@@ -183,26 +213,26 @@ The plots are created using the seaborn method histplot<sup id="a24">[24](#f24)<
 
 plt.grid() is a matplotlib method that adds a grid to the plot, which makes it easier to read the values of each bin<sup id="a25">[25](#f25)</sup>. plt.savefig() saves the resulting plot as an image with the filename that has been specified as an argument, which in this example is 'HistogramSepalWidth.png'<sup id="a26">[26](#f26)</sup>. Once a plot has been saved, it is cleared from memory using plt.clf()<sup id="a27">[27](#f27)</sup>. Without this, the existing plot and any subsequent plots will be combined together into one plot. This would leave the histogram overly cluttered and too difficult to read.
 
-## Sepal Length Histogram
+## <b id="h12">Sepal Length Histogram</b>
 ![alt text](https://raw.githubusercontent.com/andrewjscott/pands-project2021/main/HistogramSepalLength.png "Sepal Length Histogram")
 
-## Sepal Width Histogram
+## <b id="h13">Sepal Width Histogram</b>
 ![alt text](https://raw.githubusercontent.com/andrewjscott/pands-project2021/main/HistogramSepalWidth.png "Sepal Width Histogram")
 
-## Petal Length Histogram
+## <b id="h14">Petal Length Histogram</b>
 ![alt text](https://raw.githubusercontent.com/andrewjscott/pands-project2021/main/HistogramPetalLength.png "Petal Length Histogram")
 
-## Petal Width Histogram
+## <b id="h15">Petal Width Histogram</b>
 ![alt text](https://raw.githubusercontent.com/andrewjscott/pands-project2021/main/HistogramPetalWidth.png "Petal Width Histogram")
 
 While the summary tables when separated by species gave us useful information, plotting this information graphically can tell us about these findings faster than looking through a table of numbers. Many of the conclusions mentioned above after looking at the summary tables can be seen at a glance using histograms. For example, we can see how the petals of *Iris setosa* are all smaller than *Iris versicolor* and *Iris virginica*, and how there is a lot of overlap between all three species when looking at their sepal width. If we were shown three *Iris* flowers at random that were measured for this dataset, one from each species, and tasked with determining what species each flower was, we could be 100% confident in identifying the *Iris setosa* flower by its petal size alone. It would also be reasonable to assume the flower with the largest petals is an *Iris virginica*, but we would be less confident in this answer due to the slight overlap between the petal sizes of *Iris versicolor* and *Iris virginica* among some of the measured samples.
  
 The summary tables and histograms compliment each other well - the histogram for quickly spotting patterns in the data, and the tables for precise measurements of the summaries.
 
-# Boxplots
+# <b id="h16">Boxplots</b>
 Another useful plot type for analysing data is the boxplot<sup id="a28">[28](#f28)</sup>. It is useful for showing the quartile ranges of the data, while also indicating if the data is skewed in any way and if there are any outliers.
 
-## How to interprete a Boxplot
+## How to Interprete a Boxplot</b>
 ![alt text](https://raw.githubusercontent.com/andrewjscott/PandsWork/main/1%202c21SkzJMf3frPXPAR_gZA.png "How to interprete a Boxplot")
 Image source<sup id="a28">[28](#f28)</sup>
 
@@ -221,12 +251,12 @@ While the four histogram plots above were generated separately, it is also possi
 
 Another seaborn method, catplot, allows us to generate multiple plots on one image<sup id="a32">[32](#f32)</sup>. To customise the output the following arguments were used - The dataframe used is the iris_melt dataframe. The “species” is shown along the x-axis by assigning it to x, while the new column generated by the iris_melt transformation of “value” is assigned to y for it to be used as the y-axis. This would have been much harder to achieve had we used the original iris dataframe where the values are in different columns. By assigning “variable” to col, we ensure that each variable gets its own separate plot. Many kinds of plots can be generated using the catplot method, and in this instance to make a boxplot, we specify the kind as “box”. Finally, col_wrap set to 2 means that two plots will be generated side by side before moving to a new row. Since we have two plots, this means we get a neat output of two plots on two rows. 
 
-## Boxplots of the *Iris* Dataset
+## <b id="h17">Boxplots of the *Iris* Dataset</b>
 ![alt text](https://raw.githubusercontent.com/andrewjscott/pands-project2021/main/Boxplot.png "Boxplots of the Iris dataset")
 
 From these boxplots we can again see how the petal sizes for *Iris setosa* are smaller and have a narrower range of values than *Iris versicolor* and *Iris virginica*, who share some overlap. We can also see a number of outliers among all variables, most notably the petal values for *Iris setosa*, while the sepal length of one *Iris virginica* is significantly smaller than the other recorded values for that species.
 
-# Violin plot
+# <b id="h18">Violin plot</b>
 A violin plot is a plot type that combines the information from both the boxplot and the distribution curves of the histogram<sup id="a33">[33](#f33)</sup>. The black box in the center of each violin is the information represented by the boxplots, with the thinner lines being the boxplot whiskers. The distribution curve is then plotted alongside the boxplot, and the curve is mirrored on the opposite side which leads to the violin-esque shape. Violin plots won't tell us anything we haven't already learned from the plots we already have, but they are a useful alternative for times when space is limited, and can be generated using the following code.
 
 ```
@@ -238,10 +268,10 @@ plt.clf()
 ```
 The code is almost identical to the code used to create the boxplots, with the only difference being that the kind parameter is changed from “box” to “violin”. By default this resulted in a plot where the y-axis was ticked in intervals of 2, which I felt was too large. The set method was therefore used to set the y ticks to consist of all integers in the range of 0 to 9<sup id="a34">[34](#f34)</sup>. 
 
-## Violin Plots of the *Iris* Dataset
+## <b id="h19">Violin Plots of the *Iris* Dataset</b>
 ![alt text](https://raw.githubusercontent.com/andrewjscott/pands-project2021/main/Violin.png "Violin plots of the Iris dataset")
 
-# Scatterplots/Pairplot
+# <b id="h20">Scatterplots/Pairplot</b>
 The summary tables, histograms, box plots, and violin plots are all examples of univariate analysis, which means they look at only one measurement variable at a time. However, it’s also possible to conduct multivariate analysis by looking at the relationship between two variables at a time. Scatterplots allow us to do this, by mapping the point of one variable on the x-axis, and a second variable on the y-axis. As we have four variables, we would require six scatterplots to plot all possible combinations of variables. By using pairplots, we can quickly generate all possible combinations of scatterplots on one image<sup id="a35">[35](#f35)</sup>. In addition, A histogram or density curve can be included at the diagonal point where a particular variable is labeled on both the x and y-axis at the same time. Above the diagonal histogram/curves plots we get six more scatterplots, which provide the same information as the plots below the diagonal histogram/curves plots, just with the axes reversed.
 
 ```
@@ -255,12 +285,12 @@ A pairplot can be created using the seaborn method pairplot. Arguments are passe
 
 As the scatterplots above the curve plots provide the same information as the scatterplots below by default, a line of code was added to alter the upper scatterplots. By using the seaborn method map_upper<sup id="a36">[36](#f36)</sup> and passing in sns.kdeplot as an argument, the upper plots are altered slightly to include circles that group particular clusters of datapoints<sup id="a37">[37](#f37)</sup>. Setting labels to 3 means there are up to three circles drawn for each species. I felt these circles compliment the scatterplots below by highlighting isolated clusters based on size, as well as overlap between species.
 
-## Pairplot of the *Iris* Dataset
+## <b id="h21">Pairplot of the *Iris* Dataset</b>
 ![alt text](https://raw.githubusercontent.com/andrewjscott/pands-project2021/main/Pairplot.png "Pairplot of the Iris Dataset")
 
 From this plot, we can see how pronounced the difference in petal size is between *Iris setosa*, *Iris versicolor*, and *Iris virginica*. All the *Iris setosa* plants are grouped in a tight cluster with a petal length of less than 2cm and a petal width of less than 0.8cm. We can also see how almost all *Iris versicolor* can be isolated from *Iris virginica* based on petal length and width. There is a small amount of overlap, but in general *Iris virginica* have the largest petal length and width, with *Iris versicolor* falling in the middle. A similar, but not as pronounced pattern can also be observed by looking at petal length along with sepal width. 
 
-# Correlations
+# <b id="h22">Correlations</b>
 The strength of a relationship between two variables can be shown by calculating their correlation<sup id="a38">[38](#f38)</sup>. Correlations are values between -1 and 1, which calculate the relationship between one variable and another. A positive correlation of 1 indicates that as variable 1 increases, variable 2 also increases at the same rate. A negative correlation of -1 is the inverse, as variable 1 increases, variable 2 decreases at the same rate. While it’s important to be aware of spurious correlations<sup id="a39">[39](#f39)</sup>, they can nevertheless be indicative of an informative relationship between two variables.
 
 ```
@@ -276,7 +306,7 @@ correlations.to_csv(r'iris_correlations.csv', sep=',', mode='w')
 ```
 A commas separated values file of the table is also created with this code using the to_csv method.
 
-## Variable Correlations Table
+## <b id="h23">Variable Correlations Table</b>
 |                    | sepal length in cm | sepal width in cm | petal length in cm | petal width in cm |
 |--------------------|--------------------|-------------------|--------------------|-------------------|
 | sepal length in cm | 1.000000           | -0.109369         | 0.871754           | 0.817954          |
@@ -286,6 +316,7 @@ A commas separated values file of the table is also created with this code using
 
 As we saw in the scatterplot, the relationship between petal length and petal width is strongly positive at 0.96. This means that if we were only shown the petal length of a sample, we could infer the width of that petal with a high degree of accuracy, and vice versa. 
 
+## <b id="h24">Heatmap</b>
 While this table is useful, the same information can be plotted on a heatmap to visualise the strength of correlations<sup id="a41">[41](#f41)</sup>. The layout of a heatmap is similar to a pairplot, in that it shows every possible combination of variables, with the information above the diagonal being a mirror of the information below. 
 
 ```
@@ -297,17 +328,27 @@ plt.clf()
 
 A heatmap is created using the seaborn method heatmap<sup id="a42">[42](#f42)</sup>. The correlation table generated is passed in as the data for our heatmap to use. Heatmaps are assigned a colour spectrum to indicate the strength of the correlations for each combination of variables. In this instance, a spectrum of red and gray was chosen by assigning “RdGy” to cmap<sup id="a43">[43](#f43)</sup>. This means that a darker shade of red indicates a stronger negative correlation, while a darker shade of gray indicates a stronger positive correlation. By setting annot to True, each segment will also contain the numerical value for that correlation. The resulting heatmap had an issue with the axis labels being cut off. This was fixed by using the method figure.tight_layout()<sup id="a44">[44](#f44)</sup>.
 
-## Correlation Heatmap of the *Iris* Dataset
+## <b id="h25">Correlation Heatmap of the *Iris* Dataset</b>
 ![alt text](https://raw.githubusercontent.com/andrewjscott/pands-project2021/main/Correlation%20Heatmap.png "Correlation Heatmap of the Iris dataset")
 
-# Conclusion
+# <b id="h26">Conclusion</b>
 This analysis has highlighted some notable patterns in the *Iris* dataset. First, all the *Iris setosa* flowers measured have considerably smaller petals than *Iris versicolor* and *Iris virginica*, and while the latter two species share some overlap, the majority of *Iris versicolor* are smaller than *Iris virginica*. There is also little variance in the size of *Iris setosa* plants, with all samples having similar dimensions to each other, whereas the sizes of the other two species have greater variance. There is also a strong positive correlation between the petal length and petal width. 
 
 However, there are some limitations of this dataset that must be kept in mind. There are approximately 280 documented species of *Iris*<sup id="a45">[45](#f45)</sup>. We would need further data to be able to determine if the relationships in this dataset hold among other species of *Iris*. Also, one of the strengths of this dataset is also a weakness - namely the fact that all *Iris setosa* and *Iris versicolor* samples were measured on the same day from the same meadow. The strength of this is it limits the effect confounding variables might have on the flower dimensions, such as a different climate and environment. The downside of this is we don’t know how well these measurements generalise to samples of *Iris setosa* and *Iris versicolor* found elsewhere. Indeed, Edgar Anderson wrote that “in Alaska the species itself, *Iris setosa*, is apparently quite as variable as our other American irises”, indicating that the separation in size noted between *Iris setosa* and the other species might not be as pronounced as this analysis implies<sup id="a46">[46](#f46)</sup>. There are also the outliers that were identified in the box plot. While they were left in for the purposes of this analysis, further analysis could be taken to determine if these measurements negatively influence our findings in any way<sup id="a47">[47](#f47)</sup>. It is also possible to create machine learning code in python that can learn to categorise these data by species based on their variable measurements<sup id="a48">[48](#f48)</sup>. This includes the LDA method that is based on the analysis conducted by Fisher in his original 1936 paper<sup id="a49">[49](#f49)</sup>. However, code for this is not included in this analysis as I don’t feel my understanding of the code required for machine learning is high enough to justify its inclusion. 
 
-In conclusion, python can be used to create tables and plots that are informative for the analysis of data.
+In conclusion, python can be used to create both informative statistical summaries as well as visualisations that aid analysis and increase understanding of a dataset. These outputs can also be exported into documents such as txt, csv, or jpeg files, which provides the ability to share findings with those with no python knowledge.
 
-# References
+# <b id="h27">Acknowledgements</b>
+This section will highlight and give credit to sources that were not directly referenced, but still had an influence during the creation of this analysis.
+
+1. The lecture series Programming and Scripting delivered by Andrew Beatty provided the foundational python knowledge necessary for tackling this dataset.   
+2. [A Youtube series delivered by Applied Ai Course](https://www.youtube.com/playlist?list=PLupD_xFct8mFDeCqoUAWZpUddeqmT28_L) was useful for getting idea as to how to approach analysing the *Iris* dataset.  
+3. [A markdown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) by Adam Pritchard was used to help format the readme.    
+4. [A website for generating tables](https://www.tablesgenerator.com/markdown_tables) was used for creating markdown-friendly tables.  
+5. The answer by [user Matteo to the question “How to add footnotes to GitHub-flavoured Markdown?”](https://stackoverflow.com/questions/25579868/how-to-add-footnotes-to-github-flavoured-markdown) on Stack Overflow was used to create footnotes that link from the main text to the relevant entry in the reference section, and vice versa. This solution was also adapted to provide links from the Table of Content to the relevant heading section.    
+6. [An article detailing some of the history of the *Iris* dataset](https://towardsdatascience.com/the-iris-dataset-a-little-bit-of-history-and-biology-fb4812f5a7b5) by Yong Cui was helpful in providing an overview and historical context, as well as interesting botanical information such as the *Iris* seeds being even more informative about the species than sepal and petal size.      
+
+# <b id="h28">References</b>
 
 <b id="f1">1.</b> Fisher, R.A., 1936. The use of multiple measurements in taxonomic problems. *Annals of eugenics*, 7(2), pp.179-188.[↩](#a1)   
 <b id="f2">2.</b> Sporer, Z. 2020. Iris Species Classification — Machine Learning Model. [online] Available at: <https://morioh.com/p/eafb28ccf4e3> [Accessed 27 April 2021].[↩](#a2)   
