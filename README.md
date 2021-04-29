@@ -24,7 +24,7 @@ Anderson hoped to gain insight into the evolutionary variances among *Iris* flow
 Fisher used the *Iris* dataset to demonstrate a statistical method that became known as Fisher's linear discriminant. This is a classification method that attempts to project multidimensional data onto a plane that would allow one to more easily identify features that differ between sample points. This in turn allows for the data to be grouped into separate classes based on the features identified as most different between groups after the transformation. Fisher’s linear discriminant is used in a generalised form called linear discriminant analysis(LDA) in machine learning<sup id="a4">[4](#f4)</sup>. 
 
 ## Before and after LDA
-![alt text](https://raw.githubusercontent.com/andrewjscott/PandsWork/main/Before-LDA-and-after-LDA_.jpg "Before and after LDA")
+![alt text](https://raw.githubusercontent.com/andrewjscott/PandsWork/main/Before-LDA-and-after-LDA_.jpg "Before and after LDA")   
 Image source<sup id="a5">[5](#f5)</sup> 
 
 # Loading the *Iris* Dataset
