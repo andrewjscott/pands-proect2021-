@@ -12,6 +12,7 @@ Python packages not part of the Python Standard Library that were installed and 
 
 These can be installed by downloading the requirements.txt file and running pip3 install -r requirements.txt. The requirements.txt file was generated using pipreqs 0.4.10.
 
+For this code to work, please ensure that the analysis.py file and the iris.data file are downloaded and stored in the same folder.
 
 # Table of Contents
 * <b id="toc1">[Background](#h1)</b>
