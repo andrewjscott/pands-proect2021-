@@ -1,6 +1,7 @@
-# An analysis of Fisher’s Iris data set
+# An analysis of Fisher’s Iris data set in python
 # Author: Andrew Scott
 
+# Importing libraries used in this analysis. See readme for more detail their uses.
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -24,6 +25,7 @@ print(iris.head()) # Prints first five entries of dataframe to give us an idea a
 # Info to add dataframe to text file found at: https://stackoverflow.com/questions/31247198/python-pandas-write-content-of-dataframe-into-text-file
 with open("iris_summary.txt", "w") as f:
     # Creates a pandas dataframe containing basic descriptive statistics from the dataset. This is then converted to a string so it can be 
+    # Double brackets used to select colums. Inner brackets define python list, outer to select data from df, as per pandas documentation
     # written to the text file. Two new lines are also specified to seperate this output from subsequent outputs
     descriptives = iris.describe()
     f.write(descriptives.to_string() + "\n\n") 
@@ -112,9 +114,8 @@ plt.savefig('Violin.png')
 plt.clf()
 
 # Scatterplots
-# Using different markers as well as colour to make the different specieses more clear, which is important should someone with colourblindness find 
-# it tricky to differentiate species by colour alone.
-sns.set_style("whitegrid")
+# Using different markers as well as colour to make the different specieses more clear
+# KDE plot added to provide some extra useful visulisation
 pair = sns.pairplot(iris, hue="species", markers=["o", "s", "D"])
 pair.map_upper(sns.kdeplot, levels=3)
 plt.savefig('Pairplot.png')
