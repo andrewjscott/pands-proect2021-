@@ -348,8 +348,8 @@ This section will highlight and give credit to sources that were not directly re
 5. The answer by [user Matteo to the question “How to add footnotes to GitHub-flavoured Markdown?”](https://stackoverflow.com/questions/25579868/how-to-add-footnotes-to-github-flavoured-markdown) on Stack Overflow was used to create footnotes that link from the main text to the relevant entry in the reference section, and vice versa. This solution was also adapted to provide links from the Table of Content to the relevant heading section.    
 6. [An article detailing some of the history of the *Iris* dataset](https://towardsdatascience.com/the-iris-dataset-a-little-bit-of-history-and-biology-fb4812f5a7b5) by Yong Cui helped provide an overview and historical context, as well as interesting botanical information such as the *Iris* seeds being even more informative about the species than sepal and petal size.     
 7. Much of this readme was first written in [Google Docs](docs.google.com/) before being copy-pasted into a markdown file in Visual Studio Code.   
-
-
+8. The [Grammarly plugin for Firefox](https://www.grammarly.com/) was used to highlight any potential spelling/grammar errors.
+ 
 # <b id="h28">References</b>
 
 <b id="f1">1.</b> Fisher, R.A., 1936. The use of multiple measurements in taxonomic problems. *Annals of eugenics*, 7(2), pp.179-188.[↩](#a1)   
